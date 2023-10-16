@@ -46,15 +46,15 @@ public class CategoryEntity implements Serializable {
 		this.icon = icon;
 	}
 
-	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-	private List<ProductEntity> products;
-
-	public List<ProductEntity> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<ProductEntity> products) {
-		this.products = products;
-	}
+//	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+//	private List<ProductEntity> products;
+//
+//	public List<ProductEntity> getProducts() {
+//		return products;
+//	}
+//
+//	public void setProducts(List<ProductEntity> products) {
+//		this.products = products;
+//	}
 
 }

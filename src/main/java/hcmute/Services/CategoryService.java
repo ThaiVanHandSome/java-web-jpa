@@ -30,7 +30,7 @@ public class CategoryService implements ICategoryService {
 	}
 
 	@Override
-	public CategoryEntity findByCateName(String cateName) {
+	public List<CategoryEntity> findByCateName(String cateName) {
 		return cateDAO.findByCateName(cateName);
 	}
 
@@ -42,6 +42,11 @@ public class CategoryService implements ICategoryService {
 	@Override
 	public List<CategoryEntity> findAll(int page, int pagesize) {
 		return cateDAO.findAll(page, pagesize);
+	}
+
+	@Override
+	public int count() {
+		return cateDAO.count();
 	}
 
 }

@@ -11,12 +11,12 @@
 		<properties>
 
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:sqlserver://localhost:1433;databaseName=BanHang" />
+				value="jdbc:sqlserver://localhost:1433;databaseName=CATEGORY" />
 
 			<property name="javax.persistence.jdbc.user" value="sa" />
 
 			<property name="javax.persistence.jdbc.password"
-				value="1234567@a$" />
+				value="Vanbs1234qq!" />
 
 			<property name="javax.persistence.jdbc.driver"
 				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />

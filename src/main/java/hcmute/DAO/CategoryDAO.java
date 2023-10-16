@@ -5,6 +5,7 @@ import java.util.Locale.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import hcmute.Entities.CategoryEntity;
@@ -52,7 +53,7 @@ public class CategoryDAO implements ICategoryDAO {
 		EntityTransaction trans = enma.getTransaction();
 		try {
 			trans.begin();
-			Category category = enma.find(Category.class, cateid);
+			CategoryEntity category = enma.find(CategoryEntity.class, cateid);
 			if(category != null) {
 				enma.remove(category);
 			}
@@ -87,9 +88,20 @@ public class CategoryDAO implements ICategoryDAO {
 	}
 
 	@Override
-	public CategoryEntity findByCateName(String cateName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CategoryEntity> findByCateName(String cateName) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "SELECT c FROM Category c WHERE c.CategoryName like :cateName";
+		TypedQuery<CategoryEntity> query = enma.createQuery(jpql, CategoryEntity.class);
+		query.setParameter("catename", "%" + cateName + "%");
+		return query.getResultList();
+	}
+
+	@Override
+	public int count() {
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "SELECT count(c) FROM Category c";
+		Query query = enma.createQuery(jpql);
+		return ((Long)query.getSingleResult()).intValue();
 	}
 	
 

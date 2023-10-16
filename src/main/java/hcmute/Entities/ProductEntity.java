@@ -33,9 +33,9 @@ public class ProductEntity implements Serializable {
 	private int Amount;
 	private int stoke;
 
-	@ManyToOne
-	@JoinColumn(name = "CategoryID")
-	private CategoryEntity category;
+//	@ManyToOne
+//	@JoinColumn(name = "CategoryID")
+//	private CategoryEntity category;
 
 	public ProductEntity() {
 		super();
@@ -113,12 +113,12 @@ public class ProductEntity implements Serializable {
 		this.stoke = stoke;
 	}
 
-	public CategoryEntity getCategory() {
-		return category;
-	}
-
-	public void setCategory(CategoryEntity category) {
-		this.category = category;
-	}
+//	public CategoryEntity getCategory() {
+//		return category;
+//	}
+//
+//	public void setCategory(CategoryEntity category) {
+//		this.category = category;
+//	}
 
 }

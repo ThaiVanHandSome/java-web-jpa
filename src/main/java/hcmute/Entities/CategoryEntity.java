@@ -12,9 +12,9 @@ public class CategoryEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int CategoryID;
+	private int categoryID;
 	@Column(columnDefinition = "nvarchar(1000)")
-	private String CategoryName;
+	private String categoryName;
 	@Column(columnDefinition = "nvarchar(1000)")
 	private String icon;
 
@@ -23,19 +23,19 @@ public class CategoryEntity implements Serializable {
 	}
 
 	public int getCategoryID() {
-		return CategoryID;
+		return categoryID;
 	}
 
 	public void setCategoryID(int categoryID) {
-		CategoryID = categoryID;
+		this.categoryID = categoryID;
 	}
 
 	public String getCategoryName() {
-		return CategoryName;
+		return categoryName;
 	}
 
 	public void setCategoryName(String categoryName) {
-		CategoryName = categoryName;
+		this.categoryName = categoryName;
 	}
 
 	public String getIcon() {

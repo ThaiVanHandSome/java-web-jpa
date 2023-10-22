@@ -12,6 +12,9 @@ import hcmute.Entities.CategoryEntity;
 import hcmute.JPAConfig.JPAConfig;
 
 public class CategoryDAO implements ICategoryDAO {
+	
+	protected EntityManager entitymanager = JPAConfig.getEntityManager();
+	EntityTransaction transaction = entitymanager.getTransaction();
 
 	@Override
 	public void insert(CategoryEntity category) {
@@ -48,15 +51,16 @@ public class CategoryDAO implements ICategoryDAO {
 	}
 
 	@Override
-	public void delete(int cateid) throws Exception {
+	public void delete(int categoryID) throws Exception {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
 		try {
 			trans.begin();
-			CategoryEntity category = enma.find(CategoryEntity.class, cateid);
+			CategoryEntity category = enma.find(CategoryEntity.class, categoryID);
 			if(category != null) {
 				enma.remove(category);
 			}
+			trans.commit();
 		} catch (Exception e) {
 			throw new Exception("Not found!");
 		} finally {

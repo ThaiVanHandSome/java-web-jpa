@@ -25,7 +25,7 @@ import hcmute.Utils.UploadUtils;
 @WebServlet(urlPatterns = { "/admin-category", "/admin-category/create", "/admin-category/delete",
 		"/admin-category/edit", "/admin-category/update", "/admin-category/reset" })
 public class CategoryController extends HttpServlet {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	ICategoryService cateService = new CategoryService();
@@ -69,12 +69,14 @@ public class CategoryController extends HttpServlet {
 
 	private void update(HttpServletRequest req, HttpServletResponse resp) {
 		try {
+			String categoryID = req.getParameter("categoryid");
 			req.setCharacterEncoding("UTF-8");
 			resp.setCharacterEncoding("UTF-8");
 			CategoryEntity category = new CategoryEntity();
 			BeanUtils.populate(category, req.getParameterMap());
+			category.setCategoryID(Integer.parseInt(categoryID));
 			CategoryEntity oldCate = cateService.findById(category.getCategoryID());
-			if(req.getPart("images").getSize() == 0) {
+			if(req.getPart("icon").getSize() == 0) {
 				category.setIcon(oldCate.getIcon());
 			} else {
 				if(oldCate.getIcon() != null) {
@@ -86,8 +88,8 @@ public class CategoryController extends HttpServlet {
 						System.out.println(Constants.DIR + "\\category\\" + fileName);
 					}
 				}
-				String fileName = category.getCategoryName() + System.currentTimeMillis();
-				category.setIcon(UploadUtils.processUpload("images", req, Constants.DIR + "\\category\\", fileName));
+				String fileName = "" + System.currentTimeMillis();
+				category.setIcon(UploadUtils.processUpload("icon", req, Constants.DIR + "\\category\\", fileName));
 			}
 			cateService.update(category);
 			
@@ -105,8 +107,8 @@ public class CategoryController extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 			CategoryEntity category = new CategoryEntity();
 			BeanUtils.populate(category, req.getParameterMap());
-			String fileName = category.getCategoryName() + System.currentTimeMillis();
-			category.setIcon(UploadUtils.processUpload("images", req, Constants.DIR + "\\category\\", fileName));
+			String fileName = "" + System.currentTimeMillis();
+			category.setIcon(UploadUtils.processUpload("icon", req, Constants.DIR + "\\category\\", fileName));
 			cateService.insert(category);
 			req.setAttribute("message", "Đã thêm thành công!");
 		} catch (Exception e) {
@@ -129,8 +131,8 @@ public class CategoryController extends HttpServlet {
 
 	private void edit(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			String CategoryID = req.getParameter("categoryid");
-			CategoryEntity category = cateService.findById(Integer.parseInt(CategoryID));
+			String categoryID = req.getParameter("categoryid");
+			CategoryEntity category = cateService.findById(Integer.parseInt(categoryID));
 			req.setAttribute("category", category);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,8 +143,8 @@ public class CategoryController extends HttpServlet {
 
 	private void delete(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			String CategoryID = req.getParameter("categoryid");
-			cateService.delete(Integer.parseInt(CategoryID));
+			String categoryID = req.getParameter("categoryid");
+			cateService.delete(Integer.parseInt(categoryID));
 			req.setAttribute("message", "Đã xóa thành công!");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -151,10 +153,12 @@ public class CategoryController extends HttpServlet {
 		
 	}
 	
-	public static void main(String[] args) {
-		ICategoryService cateService = new CategoryService();
-		List<CategoryEntity> list = cateService.findAll();
-		System.out.println(list);
+	public static void main(String[] args, HttpServletRequest req, HttpServletResponse resp) {
+//		ICategoryService cateService = new CategoryService();
+//		List<CategoryEntity> list = cateService.findAll();
+//		System.out.println(list);
+		String categoryID = req.getParameter("categoryid");
+		System.out.println(categoryID);
 	}
 	
 }
